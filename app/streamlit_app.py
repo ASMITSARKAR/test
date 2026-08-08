@@ -302,25 +302,7 @@ def main():
     if st.session_state.is_running:
         if st.session_state.predictor is None:
             with st.spinner("Initializing AI Models (MediaPipe & PyTorch)..."):
-                try:
-                    st.session_state.predictor = RealtimePredictor(config_path="config.yaml")
-                except RuntimeError as e:
-                    if "mediapipe.solutions.holistic is not available" in str(e):
-                        st.error("🚨 **CRITICAL ENVIRONMENT ERROR** 🚨\n\n"
-                                 "Streamlit Cloud is forcing your app to run on **Python 3.14**, but Google MediaPipe "
-                                 "is completely broken on this Python version!\n\n"
-                                 "To fix this permanently, you MUST manually change the Python version:\n"
-                                 "1. Go to your Streamlit App Dashboard (`share.streamlit.io`)\n"
-                                 "2. Click the three dots (⋮) next to your app and select **Delete**\n"
-                                 "3. Click **New app** and select your repository again\n"
-                                 "4. **BEFORE CLICKING DEPLOY**, click on **Advanced settings**\n"
-                                 "5. Change the **Python version** to **3.11**\n"
-                                 "6. Click Deploy!\n\n"
-                                 "The app will work flawlessly once you do this!")
-                        st.session_state.is_running = False
-                        st.stop()
-                    else:
-                        raise e
+                st.session_state.predictor = RealtimePredictor(config_path="config.yaml")
 
         cap = get_working_webcam(camera_index=cam_idx)
 
