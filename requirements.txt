@@ -9,14 +9,15 @@
 # 2. Avoid mixing CUDA versions for PyTorch and MediaPipe.
 # 3. MediaPipe + OpenCV version matching prevents video feed locking (Bug I1 & Bug I4).
 
-# Deep Learning Framework (PyTorch with torchvision)
-# Reference: implementation_plan.md -> Section 1.1 (Framework Preference: PyTorch)
+# Deep Learning Framework (PyTorch with torchvision) - Forced CPU for Streamlit
+--extra-index-url https://download.pytorch.org/whl/cpu
 torch>=2.0.0
 torchvision>=0.15.0
 
 # Computer Vision & Pose Extraction
 # Reference: implementation_plan.md -> Section 4.4 (Stage 2: MediaPipe Holistic Keypoint Extraction)
 mediapipe==0.10.21
+protobuf<4.0.0
 opencv-python-headless>=4.8.0
 
 # Data Processing, Array Manipulations & Dataframes
